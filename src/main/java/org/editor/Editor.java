@@ -83,6 +83,8 @@ class Editor extends JFrame implements ActionListener {
                 // Присвоить заголовоку пусть выбранного каталога
                 File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
 
+                fixFileLog(file);
+
                 try {
                     // Создать файл для записи
                     FileWriter fileWriter = new FileWriter(file, false);
@@ -116,6 +118,7 @@ class Editor extends JFrame implements ActionListener {
 
             // Выбран файл
             if (repo == JFileChooser.APPROVE_OPTION) {
+                // Присвоить заголовоку пусть выбранного каталога
                 File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
 
                 try {
@@ -125,6 +128,7 @@ class Editor extends JFrame implements ActionListener {
 
                     string2 = bufferedReader.readLine();
 
+                    // Конкатинация строк
                     while ((string1 = bufferedReader.readLine()) != null) {
                         string2 = string2 + "\n" + string1;
                     }
@@ -149,7 +153,9 @@ class Editor extends JFrame implements ActionListener {
             JFileChooser fileChooser = new JFileChooser("Delete:");
             int repo = fileChooser.showOpenDialog(null);
 
+            // Выбран файл
             if (repo == JFileChooser.APPROVE_OPTION) {
+                // Присвоить заголовоку пусть выбранного каталога
                 File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
 
                 try {
@@ -177,6 +183,12 @@ class Editor extends JFrame implements ActionListener {
 
             logger.debug("\tFINISH \'new\'");
         }
+    }
+
+    private static void fixFileLog(File file) {
+        String expectedPath = file.getPath();
+
+
     }
 
     // Главный метод
