@@ -1,6 +1,5 @@
 package org.editor;
 
-import javafx.stage.FileChooser;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -10,6 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class Editor extends JFrame implements ActionListener {
     private final static Logger logger = Logger.getLogger(Editor.class);
@@ -83,7 +88,11 @@ class Editor extends JFrame implements ActionListener {
                 // Присвоить заголовоку пусть выбранного каталога
                 File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
 
-                fixFileLog(file);
+                try {
+                    fixFileLog(file);
+                } catch (FileNotFoundException ex) {
+                    logger.error("-- File was not found --");
+                }
 
                 try {
                     // Создать файл для записи
@@ -185,15 +194,65 @@ class Editor extends JFrame implements ActionListener {
         }
     }
 
-    private static void fixFileLog(File file) {
-        String expectedPath = file.getPath();
+    // Корректировка файла логов
+    private static void fixFileLog(File file) throws FileNotFoundException {
+        /**********************************************
+         *  Чтение файла логов
+         */
+        Scanner s = new Scanner(new File("D:\\Dump\\JDump\\file-system-service\\log4j-application.log"));
+        List<String> list = new ArrayList<String>();
 
+        while (s.hasNext()) {
+            list.add(s.next());
+        }
 
+        s.close();
+
+        /**********************************************
+         *  Чтение файлов из каталога
+         */
+        String expDir = file.getParent();
+        List<File> expFiles = Arrays.asList(listFiles(expDir));
+
+        // Проверка на соответсвие логов и каталога
+        for (File expFile : expFiles) {
+            boolean mustExist = true;
+            Pattern pattern = Pattern.compile(expFile.getAbsolutePath());
+
+            for (String line : list) {
+                Matcher matcherDelete = pattern.matcher("FINISH 'delete':" + line);
+                Matcher matcherSave = pattern.matcher("FINISH 'save':" + line);
+
+                if (matcherDelete.find()) {
+                    mustExist = false;
+                } else if (matcherSave.find()) {
+                    mustExist = true;
+                }
+            }
+
+            if (mustExist) {
+                logger.warn("\tFORCE \'save\':" + expFile.getAbsolutePath());
+                File file1 = new File(expFile.getAbsolutePath());
+            } else {
+                logger.warn("\tFORCE \'delete\':" + expFile.getAbsolutePath());
+                expFile.delete();
+            }
+        }
+    }
+
+    // Чтение файлов из каталога
+    private static File[] listFiles(String dirName) {
+        File dir = new File(dirName);
+
+        return dir.listFiles(new FilenameFilter() {
+            public boolean accept(File dir, String filename) {
+                return filename.endsWith(".txt");
+            }
+        });
     }
 
     // Главный метод
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Editor editor = new Editor();
     }
 }

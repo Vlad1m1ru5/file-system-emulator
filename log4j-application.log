@@ -1,14 +1,15 @@
-2019-05-09 15:52:30 DEBUG Editor:174 - User starts 'new'
-2019-05-09 15:52:30 DEBUG Editor:182 - SUCCESS 'new'
-2019-05-09 15:52:30 DEBUG Editor:183 - User ends 'new'
-2019-05-09 15:52:40 DEBUG Editor:113 - User starts 'open'
-2019-05-09 15:52:48 DEBUG Editor:145 - User cancels 'open'
-2019-05-09 15:52:48 DEBUG Editor:148 - User ends 'open'
-2019-05-09 16:09:51 DEBUG Editor:75 - START 'save'
-2019-05-09 16:10:17 DEBUG Editor:98 - FINISH 'save':D:\Projects__ALL\Projects__Java\IJI\editor\fromEdit.txt
-2019-05-09 16:10:22 DEBUG Editor:169 - START 'new'
-2019-05-09 16:10:22 DEBUG Editor:177 - FINISH 'new'
-2019-05-09 16:10:24 DEBUG Editor:111 - START 'open'
-2019-05-09 16:10:44 DEBUG Editor:133 - 	FINISH 'open':D:\Projects__ALL\Projects__Java\IJI\editor\fromEdit.txt
-2019-05-09 16:10:48 DEBUG Editor:146 - START 'delete'
-2019-05-09 16:11:19 DEBUG Editor:157 - FINISH 'delete':D:\Projects__ALL\Projects__Java\IJI\editor\fromEdit.txt
+2019-05-15 15:46:16 DEBUG Editor:119 - 	START 'open'
+2019-05-15 15:46:33 DEBUG Editor:143 - 	FINISH 'open':D:\Dump\toOpen.txt
+2019-05-15 15:46:37 DEBUG Editor:181 - 	START 'new'
+2019-05-15 15:46:37 DEBUG Editor:189 - 	FINISH 'new'
+2019-05-15 16:16:45 DEBUG Editor:124 - 	START 'open'
+2019-05-15 16:16:55 DEBUG Editor:148 - 	FINISH 'open':D:\Dump\toOpen.txt
+2019-05-15 16:17:01 DEBUG Editor:161 - 	START 'delete'
+2019-05-15 16:17:07 DEBUG Editor:174 - 	FINISH 'delete':D:\Dump\toOpen.txt
+2019-05-15 16:17:11 DEBUG Editor:186 - 	START 'new'
+2019-05-15 16:17:11 DEBUG Editor:194 - 	FINISH 'new'
+2019-05-15 16:17:14 DEBUG Editor:124 - 	START 'open'
+2019-05-15 16:17:17 WARN  Editor:158 - 	CANCEL 'open'
+2019-05-15 16:17:21 DEBUG Editor:82 - 	START 'save'
+2019-05-15 16:17:31 WARN  Editor:235 - 	FORCE 'save':D:\Dump\toOpen.txt
+2019-05-15 16:17:31 DEBUG Editor:111 - 	FINISH 'save':D:\Dump\toOpen.txt
